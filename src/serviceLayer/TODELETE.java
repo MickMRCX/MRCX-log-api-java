@@ -1,7 +1,7 @@
 /**
  * 
  */
-package bll;
+package serviceLayer;
 
 /**
  * @author Pascal Marcouyoux
