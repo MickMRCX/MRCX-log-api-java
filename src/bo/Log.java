@@ -25,9 +25,25 @@ public class Log implements Serializable{
 	private Date date;
 	private String message;
 	
+	public Log(int identifier, Exception exception, Severity severity, Date date, String message) {
+		super();
+		this.identifier = identifier;
+		this.exception = exception;
+		this.severity = severity;
+		this.date = date;
+		this.message = message;
+	}
 	
-	
-	
+	public Log(Exception exception, Severity severity, Date date, String message) {
+		super();
+		this.exception = exception;
+		this.severity = severity;
+		this.date = date;
+		this.message = message;
+	}
+
+
+
 	public int getIdentifier() {
 		return identifier;
 	}
