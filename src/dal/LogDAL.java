@@ -8,6 +8,6 @@ package dal;
  * @url https://github.com/P-marcou
  *
  */
-public class LogDal {
+public class LogDAL {
 
 }
