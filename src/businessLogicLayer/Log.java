@@ -10,6 +10,14 @@ import constants.Severity;
 /**
  * @author Pascal Marcouyoux
  * @url https://github.com/P-marcou
+ * <html>
+ * <br><br>
+ * private int identifier; <br>
+ * private String stackTrace; <br>
+ * private Severity severity; <br>
+ * private Date date; <br>
+ * private String message; <br>
+ * </html>
  *
  */
 public class Log implements Serializable{
@@ -20,29 +28,34 @@ public class Log implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int identifier;
-	private Exception exception;
+	private String stackTrace;
 	private Severity severity;
 	private Date date;
 	private String message;
 	
-	public Log(int identifier, Exception exception, Severity severity, Date date, String message) {
+	public Log(int identifier, String exception, Severity severity, Date date, String message) {
 		super();
 		this.identifier = identifier;
-		this.exception = exception;
+		this.stackTrace = exception;
 		this.severity = severity;
 		this.date = date;
 		this.message = message;
 	}
 	
-	public Log(Exception exception, Severity severity, Date date, String message) {
+	public Log(String exception, Severity severity, Date date, String message) {
 		super();
-		this.exception = exception;
+		this.stackTrace = exception;
 		this.severity = severity;
 		this.date = date;
 		this.message = message;
 	}
 
-
+	public Log(Severity severity, Date date, String message) {
+		super();
+		this.severity = severity;
+		this.date = date;
+		this.message = message;
+	}
 
 	public int getIdentifier() {
 		return identifier;
@@ -52,12 +65,12 @@ public class Log implements Serializable{
 		this.identifier = identifier;
 	}
 
-	public Exception getException() {
-		return exception;
+	public String getStackTrace() {
+		return stackTrace;
 	}
 	
-	public void setException(Exception exception) {
-		this.exception = exception;
+	public void setStackTrace(String exception) {
+		this.stackTrace = exception;
 	}
 	
 	public Severity getSeverity() {

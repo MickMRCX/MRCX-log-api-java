@@ -183,7 +183,7 @@ public class LogDAO {
 				request.setInt (1, log.getSeverity ( ).ordinal ( ));
 				request.setDate (2, (java.sql.Date) log.getDate ( ));
 				request.setString(3, log.getMessage ( ));
-				request.setString (4, log.getException ( ));
+				request.setString (4, log.getStackTrace ( ));
 				request.executeUpdate ( );
 				
 				
@@ -229,7 +229,7 @@ public class LogDAO {
 			request.setInt (1, log.getSeverity ( ).ordinal ( ));
 			request.setDate (2, (java.sql.Date) log.getDate ( ));
 			request.setString (3, log.getMessage ( ));
-			request.setString (4, log.getException ( ));
+			request.setString (4, log.getStackTrace ( ));
 			request.setInt (5, log.getIdentifier ( ));
 			
 			request.executeUpdate ( );
