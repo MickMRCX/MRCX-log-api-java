@@ -15,19 +15,19 @@ public class Converter {
 	public static String StacktraceToString(Exception e) {
 		String returned = null;
 
-		StringWriter sw = new StringWriter ( );
-		PrintWriter pw = new PrintWriter (sw);
+		StringWriter sw = new StringWriter( );
+		PrintWriter pw = new PrintWriter(sw);
 
-		e.printStackTrace (pw);
+		e.printStackTrace(pw);
 
-		returned = sw.toString ( );
+		returned = sw.toString( );
 
-		try {
-			pw.close ( );
-			sw.close ( );
-		} catch (IOException e1) {
+		try{
+			pw.close( );
+			sw.close( );
+		}catch(IOException e1){
 			// TODO Auto-generated catch block
-			e1.printStackTrace ( );
+			e1.printStackTrace( );
 		}
 
 		return returned;

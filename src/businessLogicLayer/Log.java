@@ -34,7 +34,7 @@ public class Log implements Serializable {
 	private String				message;
 
 	public Log(int identifier, String exception, Severity severity, Date date, String message) {
-		super ( );
+		super( );
 		this.identifier = identifier;
 		this.stackTrace = exception;
 		this.severity = severity;
@@ -43,7 +43,7 @@ public class Log implements Serializable {
 	}
 
 	public Log(String exception, Severity severity, Date date, String message) {
-		super ( );
+		super( );
 		this.stackTrace = exception;
 		this.severity = severity;
 		this.date = date;
@@ -51,7 +51,7 @@ public class Log implements Serializable {
 	}
 
 	public Log(Severity severity, Date date, String message) {
-		super ( );
+		super( );
 		this.severity = severity;
 		this.date = date;
 		this.message = message;
@@ -95,5 +95,11 @@ public class Log implements Serializable {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String toString( ) {
+		String returned = new String( );
+
+		return returned;
 	}
 }

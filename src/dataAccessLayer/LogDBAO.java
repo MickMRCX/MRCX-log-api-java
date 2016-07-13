@@ -49,44 +49,44 @@ public class LogDBAO {
 		Log returned = null;
 		Connection cnx = null;
 
-		try {
-			cnx = DataBaseAccess.getConnection ( );
-			PreparedStatement request = cnx.prepareStatement (SELECT_BY_ID);
-			request.setInt (1, id);
-			ResultSet result = request.executeQuery ( );
+		try{
+			cnx = DataBaseAccess.getConnection( );
+			PreparedStatement request = cnx.prepareStatement(SELECT_BY_ID);
+			request.setInt(1, id);
+			ResultSet result = request.executeQuery( );
 
 			// Moving to first and checking if it's also the last, so it's the
 			// only result in this ResultSet
-			result.first ( );
-			if (result.isLast ( )) {
-				int identifier = result.getInt ("identifier");
-				String exception = result.getString ("exception");
-				Severity severity = Severity.values ( )[result.getInt ("severity")];
-				Date date = result.getDate ("date");
-				String message = result.getString ("message");
+			result.first( );
+			if(result.isLast( )){
+				int identifier = result.getInt("identifier");
+				String exception = result.getString("exception");
+				Severity severity = Severity.values( )[result.getInt("severity")];
+				Date date = result.getDate("date");
+				String message = result.getString("message");
 
-				returned = new Log (identifier, exception, severity, date, message);
-			} else {
-				Log logExp = new Log (Severity.Error, new Date ( ),
+				returned = new Log(identifier, exception, severity, date, message);
+			}else{
+				Log logExp = new Log(Severity.Error, new Date( ),
 						"The Select by id returned more than one result. Your Database might be corrupt !");
 				// TODO Ecrire dans rapport.txt
 			}
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
@@ -96,45 +96,45 @@ public class LogDBAO {
 	}
 
 	public ArrayList<Log> getOneBySeverity(int svrt) {
-		ArrayList<Log> returned = new ArrayList<Log> ( );
+		ArrayList<Log> returned = new ArrayList<Log>( );
 		Log toAdd = null;
 		Connection cnx = null;
 
-		try {
-			cnx = DataBaseAccess.getConnection ( );
-			PreparedStatement request = cnx.prepareStatement (SELECT_BY_SEVERITY);
-			request.setInt (1, svrt);
-			ResultSet result = request.executeQuery ( );
+		try{
+			cnx = DataBaseAccess.getConnection( );
+			PreparedStatement request = cnx.prepareStatement(SELECT_BY_SEVERITY);
+			request.setInt(1, svrt);
+			ResultSet result = request.executeQuery( );
 
 			// Moving to first and checking if it's also the last, so it's the
 			// only result in this ResultSet
-			while (result.next ( )) {
-				int identifier = result.getInt ("identifier");
-				String exception = result.getString ("exception");
-				Severity severity = Severity.values ( )[result.getInt ("severity")];
-				Date date = result.getDate ("date");
-				String message = result.getString ("message");
+			while(result.next( )){
+				int identifier = result.getInt("identifier");
+				String exception = result.getString("exception");
+				Severity severity = Severity.values( )[result.getInt("severity")];
+				Date date = result.getDate("date");
+				String message = result.getString("message");
 
-				toAdd = new Log (identifier, exception, severity, date, message);
+				toAdd = new Log(identifier, exception, severity, date, message);
 
-				returned.add (toAdd);
+				returned.add(toAdd);
 			}
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log loglogExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log loglogExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
@@ -144,43 +144,43 @@ public class LogDBAO {
 	}
 
 	public ArrayList<Log> getAll( ) {
-		ArrayList<Log> returned = new ArrayList<Log> ( );
+		ArrayList<Log> returned = new ArrayList<Log>( );
 		Log toAdd = null;
 		Connection cnx = null;
 
-		try {
-			cnx = DataBaseAccess.getConnection ( );
-			PreparedStatement request = cnx.prepareStatement (SELECT_ALL);
-			ResultSet result = request.executeQuery ( );
+		try{
+			cnx = DataBaseAccess.getConnection( );
+			PreparedStatement request = cnx.prepareStatement(SELECT_ALL);
+			ResultSet result = request.executeQuery( );
 
 			// Moving to first and checking if it's also the last, so it's the
 			// only result in this ResultSet
-			while (result.next ( )) {
-				int identifier = result.getInt ("identifier");
-				String exception = result.getString ("exception");
-				Severity severity = Severity.values ( )[result.getInt ("severity")];
-				Date date = result.getDate ("date");
-				String message = result.getString ("message");
+			while(result.next( )){
+				int identifier = result.getInt("identifier");
+				String exception = result.getString("exception");
+				Severity severity = Severity.values( )[result.getInt("severity")];
+				Date date = result.getDate("date");
+				String message = result.getString("message");
 
-				toAdd = new Log (identifier, exception, severity, date, message);
-				returned.add (toAdd);
+				toAdd = new Log(identifier, exception, severity, date, message);
+				returned.add(toAdd);
 			}
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
@@ -191,44 +191,44 @@ public class LogDBAO {
 
 	public Log insert(Log log) {
 		Connection cnx = null;
-		try {
-			if (null != log) {
-				cnx = DataBaseAccess.getConnection ( );
-				PreparedStatement request = cnx.prepareStatement (INSERT, Statement.RETURN_GENERATED_KEYS);
-				request.setInt (1, log.getSeverity ( ).ordinal ( ));
-				request.setDate (2, (java.sql.Date) log.getDate ( ));
-				request.setString (3, log.getMessage ( ));
-				request.setString (4, log.getStackTrace ( ));
-				request.executeUpdate ( );
+		try{
+			if(null != log){
+				cnx = DataBaseAccess.getConnection( );
+				PreparedStatement request = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+				request.setInt(1, log.getSeverity( ).ordinal( ));
+				request.setDate(2, (java.sql.Date) log.getDate( ));
+				request.setString(3, log.getMessage( ));
+				request.setString(4, log.getStackTrace( ));
+				request.executeUpdate( );
 
-				ResultSet result = request.getGeneratedKeys ( );
+				ResultSet result = request.getGeneratedKeys( );
 
-				while (result.next ( )) {
-					int identifier = result.getInt ("identifier");
-					String exception = result.getString ("exception");
-					Severity severity = Severity.values ( )[result.getInt ("severity")];
-					Date date = result.getDate ("date");
-					String message = result.getString ("message");
+				while(result.next( )){
+					int identifier = result.getInt("identifier");
+					String exception = result.getString("exception");
+					Severity severity = Severity.values( )[result.getInt("severity")];
+					Date date = result.getDate("date");
+					String message = result.getString("message");
 
-					log = new Log (identifier, exception, severity, date, message);
+					log = new Log(identifier, exception, severity, date, message);
 				}
 			}
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
@@ -240,32 +240,32 @@ public class LogDBAO {
 	public Log update(Log log) {
 		Connection cnx = null;
 
-		try {
-			cnx = DataBaseAccess.getConnection ( );
-			PreparedStatement request = cnx.prepareStatement (UPDATE);
-			request.setInt (1, log.getSeverity ( ).ordinal ( ));
-			request.setDate (2, (java.sql.Date) log.getDate ( ));
-			request.setString (3, log.getMessage ( ));
-			request.setString (4, log.getStackTrace ( ));
-			request.setInt (5, log.getIdentifier ( ));
+		try{
+			cnx = DataBaseAccess.getConnection( );
+			PreparedStatement request = cnx.prepareStatement(UPDATE);
+			request.setInt(1, log.getSeverity( ).ordinal( ));
+			request.setDate(2, (java.sql.Date) log.getDate( ));
+			request.setString(3, log.getMessage( ));
+			request.setString(4, log.getStackTrace( ));
+			request.setInt(5, log.getIdentifier( ));
 
-			request.executeUpdate ( );
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			request.executeUpdate( );
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
@@ -277,29 +277,29 @@ public class LogDBAO {
 	public void delete(int id) {
 		Connection cnx = null;
 
-		try {
-			cnx = DataBaseAccess.getConnection ( );
-			PreparedStatement request = cnx.prepareStatement (DELETE);
-			request.setInt (1, id);
+		try{
+			cnx = DataBaseAccess.getConnection( );
+			PreparedStatement request = cnx.prepareStatement(DELETE);
+			request.setInt(1, id);
 
-			request.executeUpdate ( );
+			request.executeUpdate( );
 
-		} catch (SQLException e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(SQLException e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
 
-		} catch (Exception e) {
-			Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+		}catch(Exception e){
+			Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
-		} finally {
-			try {
-				if (cnx != null && !cnx.isClosed ( )) {
-					cnx.close ( );
+		}finally{
+			try{
+				if(cnx != null && !cnx.isClosed( )){
+					cnx.close( );
 				}
-			} catch (SQLException e) {
-				Log logExp = new Log (Converter.StacktraceToString (e), Severity.Critical, new Date ( ),
+			}catch(SQLException e){
+				Log logExp = new Log(Converter.StacktraceToString(e), Severity.Critical, new Date( ),
 						"Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
 			}
