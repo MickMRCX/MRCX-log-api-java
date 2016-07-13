@@ -16,11 +16,12 @@ import constants.Severity;
 import utils.Converter;
 
 /**
+ * DataBaseAccessObject
+ * 
  * @author Pascal Marcouyoux
  * @url https://github.com/P-marcou
- *
  */
-public class LogDAO {
+public class LogDBAO {
 
 	private final String	SELECT_BY_ID		= "SELECT * FROM Logs WHERE identifier = ?;";
 
@@ -34,7 +35,7 @@ public class LogDAO {
 
 	private final String	DELETE				= "DELETE FROM Logs WHERE identifier = ?;";
 
-	public LogDAO( ) {
+	public LogDBAO( ) {
 
 	}
 
