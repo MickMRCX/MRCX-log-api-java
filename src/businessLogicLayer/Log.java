@@ -28,23 +28,23 @@ public class Log implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 
 	private int					identifier;
-	private String				stackTrace;
+	private Exception			exception;
 	private Severity			severity;
 	private Date				date;
 	private String				message;
 
-	public Log(int identifier, String exception, Severity severity, Date date, String message) {
+	public Log(int identifier, Exception exception, Severity severity, Date date, String message) {
 		super( );
 		this.identifier = identifier;
-		this.stackTrace = exception;
+		this.exception = exception;
 		this.severity = severity;
 		this.date = date;
 		this.message = message;
 	}
 
-	public Log(String exception, Severity severity, Date date, String message) {
+	public Log(Exception exception, Severity severity, Date date, String message) {
 		super( );
-		this.stackTrace = exception;
+		this.exception = exception;
 		this.severity = severity;
 		this.date = date;
 		this.message = message;
@@ -65,12 +65,12 @@ public class Log implements Serializable {
 		this.identifier = identifier;
 	}
 
-	public String getStackTrace( ) {
-		return stackTrace;
+	public Exception getException( ) {
+		return exception;
 	}
 
-	public void setStackTrace(String exception) {
-		this.stackTrace = exception;
+	public void setException(Exception exception) {
+		this.exception = exception;
 	}
 
 	public Severity getSeverity( ) {
@@ -98,8 +98,17 @@ public class Log implements Serializable {
 	}
 
 	public String toString( ) {
-		String returned = new String( );
+		StringBuilder strB = new StringBuilder( );
 
-		return returned;
+		strB.append(getDate( ).toString( ));
+		strB.append(", ");
+		strB.append(getSeverity( ).ordinal( ));
+		strB.append(", ");
+		strB.append(getMessage( ));
+		strB.append(", ");
+		strB.append(getException( ));
+		strB.append(";");
+
+		return strB.toString( );
 	}
 }
