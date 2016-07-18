@@ -20,7 +20,7 @@ import constants.Severity;
  * @author Pascal Marcouyoux
  * @url https://github.com/P-marcou
  */
-public class LogDBAO {
+public class LogDB {
 
 	private final String	SELECT_BY_ID		= "SELECT * FROM Logs WHERE identifier = ?;";
 
@@ -34,7 +34,7 @@ public class LogDBAO {
 
 	private final String	DELETE				= "DELETE FROM Logs WHERE identifier = ?;";
 
-	public LogDBAO( ) {
+	public LogDB( ) {
 
 	}
 
