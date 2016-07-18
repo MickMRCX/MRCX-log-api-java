@@ -97,13 +97,29 @@ public class Log implements Serializable {
 		this.message = message;
 	}
 
+	/**
+	 * This method works for a tab size of 4 blankspaces
+	 */
 	public String toString( ) {
 		StringBuilder strB = new StringBuilder( );
 
 		strB.append(getDate( ).toString( ));
-		strB.append("\t");
+		strB.append("\t| ");
 		strB.append(getSeverity( ).toString( ));
-		strB.append("\t");
+
+		// write a second tabulation in case of a "Error" severity otherwise the
+		// log file won't be well formed
+		if(getSeverity( ).equals(Severity.Information)){
+			strB.append("\t| ");
+		}else{
+			// write a second tabulation in case of a "Error" severity otherwise
+			// the
+			// log file won't be well formed
+			if(getSeverity( ).equals(Severity.Error))
+				strB.append("\t");
+			strB.append("\t\t| ");
+		}
+
 		strB.append(getMessage( ));
 
 		return strB.toString( );
