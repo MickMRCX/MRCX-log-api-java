@@ -101,13 +101,10 @@ public class Log implements Serializable {
 		StringBuilder strB = new StringBuilder( );
 
 		strB.append(getDate( ).toString( ));
-		strB.append(", ");
-		strB.append(getSeverity( ).ordinal( ));
-		strB.append(", ");
+		strB.append("\t");
+		strB.append(getSeverity( ).toString( ));
+		strB.append("\t");
 		strB.append(getMessage( ));
-		strB.append(", ");
-		strB.append(getException( ));
-		strB.append(";");
 
 		return strB.toString( );
 	}
