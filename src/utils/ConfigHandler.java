@@ -31,14 +31,6 @@ public class ConfigHandler extends DefaultHandler {
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if(qName.equalsIgnoreCase("default")){
-			System.out.println("Fin de lecture du fichier XML");
-		}
-
-	}
-
-	@Override
 	public void characters(char ch[], int start, int length) throws SAXException {
 		if(bDirectory){
 			Configuration.setDefaultDirectory(new String(ch, start, length));

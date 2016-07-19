@@ -1,14 +1,10 @@
-import java.io.File;
 import java.util.Date;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import businessLogicLayer.Log;
 import constants.Configuration;
 import constants.Severity;
 import dataAccessLayer.LogTextFile;
-import utils.ConfigHandler;
+import utils.ReadXMLFile;
 
 /**
  * 
@@ -25,15 +21,7 @@ public class Execution {
 	 */
 	public static void main(String[] args) {
 
-		try{
-			File inputFile = new File("MRCXLogConfig.xml");
-			SAXParserFactory factory = SAXParserFactory.newInstance( );
-			SAXParser saxParser = factory.newSAXParser( );
-			ConfigHandler configHandler = new ConfigHandler( );
-			saxParser.parse(inputFile, configHandler);
-		}catch(Exception e){
-			e.printStackTrace( );
-		}
+		ReadXMLFile.readDefaultConfiguration( );
 
 		LogTextFile rapport = new LogTextFile(Configuration.getDefaultDirectory( ), Configuration.getDefaultFileName( ),
 				Configuration.getDefaultMessage( ));
