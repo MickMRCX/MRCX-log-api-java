@@ -11,7 +11,7 @@ public final class Configuration {
 
 	private static String	defaultDirectory;
 	private static String	defaultFileName;
-	private static String	defaultMessage;
+	private static String	defaultSummary;
 
 	public static String getDefaultDirectory( ) {
 		return defaultDirectory;
@@ -29,11 +29,11 @@ public final class Configuration {
 		Configuration.defaultFileName = defaultFileName;
 	}
 
-	public static String getDefaultMessage( ) {
-		return defaultMessage;
+	public static String getDefaultSummary( ) {
+		return defaultSummary;
 	}
 
-	public static void setDefaultMessage(String defaultMessage) {
-		Configuration.defaultMessage = defaultMessage;
+	public static void setDefaultSummary(String defaultSummary) {
+		Configuration.defaultSummary = defaultSummary;
 	}
 }

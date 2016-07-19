@@ -17,7 +17,7 @@ public class ConfigHandler extends DefaultHandler {
 
 	boolean	bDirectory	= false;
 	boolean	bFileName	= false;
-	boolean	bMessage	= false;
+	boolean	bSummary	= false;
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -25,8 +25,8 @@ public class ConfigHandler extends DefaultHandler {
 			bDirectory = true;
 		}else if(qName.equalsIgnoreCase("filename")){
 			bFileName = true;
-		}else if(qName.equalsIgnoreCase("message")){
-			bMessage = true;
+		}else if(qName.equalsIgnoreCase("summary")){
+			bSummary = true;
 		}
 	}
 
@@ -38,9 +38,9 @@ public class ConfigHandler extends DefaultHandler {
 		}else if(bFileName){
 			Configuration.setDefaultFileName(new String(ch, start, length));
 			bFileName = false;
-		}else if(bMessage){
-			Configuration.setDefaultMessage(new String(ch, start, length));
-			bMessage = false;
+		}else if(bSummary){
+			Configuration.setDefaultSummary(new String(ch, start, length));
+			bSummary = false;
 		}
 	}
 }

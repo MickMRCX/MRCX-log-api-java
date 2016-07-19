@@ -2,5 +2,5 @@
 <default>
 	<directory>/home/pascal/Documents/</directory>
 	<filename>report.txt</filename>
-	<message>Never gonna</message>
+	<summary>Never gonna</summary>
 </default>

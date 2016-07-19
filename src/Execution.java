@@ -24,7 +24,7 @@ public class Execution {
 		ReadXMLFile.readDefaultConfiguration( );
 
 		LogTextFile rapport = new LogTextFile(Configuration.getDefaultDirectory( ), Configuration.getDefaultFileName( ),
-				Configuration.getDefaultMessage( ));
+				Configuration.getDefaultSummary( ));
 
 		if(rapport.createFile( )){
 
@@ -55,7 +55,7 @@ public class Execution {
 			rapport.writeSeparation( );
 
 		}else{
-			System.out.println("Le fichier n'existe pas et n'a pas pu être créé.");
+			System.out.println("The file doesn't exist or couldn't be create.");
 		}
 	}
 

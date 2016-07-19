@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import businessLogicLayer.Log;
+import constants.Configuration;
 
 /**
  * FileAccessObject
@@ -17,27 +18,28 @@ import businessLogicLayer.Log;
  */
 public class LogTextFile {
 
-	private static LogTextFile	singleton;
-	private String				summary;
-	private String				name;
-	private String				dir;
+	private String	summary;
+	private String	name;
+	private String	dir;
 
-	private LogTextFile( ) {
-
-	}
-
-	public static LogTextFile getInstance( ) {
-		if(null == singleton){
-			singleton = new LogTextFile( );
-		}
-
-		return singleton;
-	}
-
-	public void initialize(String dir, String name, String summary) {
+	public LogTextFile(String dir, String name, String summary) {
 		setDir(dir);
 		setName(name);
 		setSummary(summary);
+	}
+
+	/**
+	 * Constructor use the default directory, filename and message you should
+	 * have put in MRCXLogConfig.xml<br>
+	 * <br>
+	 * 
+	 * This also need you to read the configuration file first with : <br>
+	 * <code>ReadXMLFile.readDefaultConfiguration( )</code>
+	 */
+	public LogTextFile( ) {
+		setDir(Configuration.getDefaultDirectory( ));
+		setName(Configuration.getDefaultFileName( ));
+		setSummary(Configuration.getDefaultSummary( ));
 	}
 
 	/**
@@ -84,6 +86,9 @@ public class LogTextFile {
 		}
 	}
 
+	/**
+	 * This was implemented for tests
+	 */
 	public void writeSeparation( ) {
 		try(FileWriter fw = new FileWriter(dir + name, true)){
 
