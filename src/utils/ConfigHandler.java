@@ -32,7 +32,10 @@ public class ConfigHandler extends DefaultHandler {
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		System.out.println("Fin de lecture du fichier XML");
+		if(qName.equalsIgnoreCase("default")){
+			System.out.println("Fin de lecture du fichier XML");
+		}
+
 	}
 
 	@Override
