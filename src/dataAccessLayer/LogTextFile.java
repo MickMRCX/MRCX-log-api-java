@@ -26,6 +26,7 @@ public class LogTextFile {
 		setDir(dir);
 		setName(name);
 		setSummary(summary);
+		createFile( );
 	}
 
 	/**
@@ -40,6 +41,7 @@ public class LogTextFile {
 		setDir(Configuration.getDefaultDirectory( ));
 		setName(Configuration.getDefaultFileName( ));
 		setSummary(Configuration.getDefaultSummary( ));
+		createFile( );
 	}
 
 	/**
