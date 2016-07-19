@@ -1,8 +1,14 @@
+import java.io.File;
 import java.util.Date;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import businessLogicLayer.Log;
+import constants.Configuration;
 import constants.Severity;
 import dataAccessLayer.LogTextFile;
+import utils.ConfigHandler;
 
 /**
  * 
@@ -19,17 +25,22 @@ public class Execution {
 	 */
 	public static void main(String[] args) {
 
-		LogTextFile rapport = LogTextFile.getInstance( );
+		try{
+			File inputFile = new File("MRCXLogConfig.xml");
+			SAXParserFactory factory = SAXParserFactory.newInstance( );
+			SAXParser saxParser = factory.newSAXParser( );
+			ConfigHandler configHandler = new ConfigHandler( );
+			saxParser.parse(inputFile, configHandler);
+		}catch(Exception e){
+			e.printStackTrace( );
+		}
 
-		rapport.initialize("/home/pascal/Musique/", "rapport.txt", "Bonjour ceci est un test");
+		LogTextFile rapport = new LogTextFile(Configuration.getDefaultDirectory( ), Configuration.getDefaultFileName( ),
+				Configuration.getDefaultMessage( ));
 
 		if(rapport.createFile( )){
 
-			Log log = new Log(Severity.Verbose, new Date( ), "Never gonna");
-
-			rapport.writeLog(log);
-
-			log = new Log(Severity.Information, new Date( ), "give you up");
+			Log log = new Log(Severity.Verbose, new Date( ), "give you up");
 
 			rapport.writeLog(log);
 
