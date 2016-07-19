@@ -43,8 +43,9 @@ public class LogDB {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws SQLException
 	 */
-	public Log getOneById(int id) {
+	public Log getOneById(int id) throws SQLException {
 		Log returned = null;
 		Connection cnx = null;
 
@@ -73,11 +74,13 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
@@ -86,13 +89,14 @@ public class LogDB {
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 
 		return returned;
 	}
 
-	public ArrayList<Log> getOneBySeverity(int svrt) {
+	public ArrayList<Log> getOneBySeverity(int svrt) throws SQLException {
 		ArrayList<Log> returned = new ArrayList<Log>( );
 		Log toAdd = null;
 		Connection cnx = null;
@@ -119,26 +123,29 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
 					cnx.close( );
 				}
 			}catch(SQLException e){
-				Log loglogExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
+				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 
 		return returned;
 	}
 
-	public ArrayList<Log> getAll( ) {
+	public ArrayList<Log> getAll( ) throws SQLException {
 		ArrayList<Log> returned = new ArrayList<Log>( );
 		Log toAdd = null;
 		Connection cnx = null;
@@ -163,26 +170,29 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
 					cnx.close( );
 				}
 			}catch(SQLException e){
-				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
+				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 
 		return returned;
 	}
 
-	public Log insert(Log log) {
+	public Log insert(Log log) throws SQLException {
 		Connection cnx = null;
 		try{
 			if(null != log){
@@ -209,26 +219,29 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
 					cnx.close( );
 				}
 			}catch(SQLException e){
-				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
+				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 
 		return log;
 	}
 
-	public Log update(Log log) {
+	public Log update(Log log) throws SQLException {
 		Connection cnx = null;
 
 		try{
@@ -244,26 +257,29 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
 					cnx.close( );
 				}
 			}catch(SQLException e){
-				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
+				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 
 		return log;
 	}
 
-	public void delete(int id) {
+	public void delete(int id) throws SQLException {
 		Connection cnx = null;
 
 		try{
@@ -276,19 +292,22 @@ public class LogDB {
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 			// TODO Ecrire dans rapport.txt
+			throw e;
 		}finally{
 			try{
 				if(cnx != null && !cnx.isClosed( )){
 					cnx.close( );
 				}
 			}catch(SQLException e){
-				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
+				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
 				// TODO Ecrire dans rapport.txt
+				throw e;
 			}
 		}
 	}

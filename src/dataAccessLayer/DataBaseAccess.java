@@ -25,7 +25,6 @@ public class DataBaseAccess {
 		}catch(SQLException e){
 			Log log = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 			// TODO Ecrire dans rapport.txt
-
 		}catch(Exception e){
 			Log log = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");

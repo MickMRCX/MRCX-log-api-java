@@ -1,9 +1,9 @@
 import java.util.Date;
 
 import businessLogicLayer.Log;
-import constants.Configuration;
+import constants.DalEnum;
 import constants.Severity;
-import dataAccessLayer.LogTextFile;
+import serviceLayer.CtrlLog;
 import utils.ReadXMLFile;
 
 /**
@@ -23,40 +23,38 @@ public class Execution {
 
 		ReadXMLFile.readDefaultConfiguration( );
 
-		LogTextFile rapport = new LogTextFile(Configuration.getDefaultDirectory( ), Configuration.getDefaultFileName( ),
-				Configuration.getDefaultSummary( ));
+		CtrlLog rapport = CtrlLog.getInstance( );
 
-		if(rapport.createFile( )){
+		try{
+			rapport.createTextFile( );
 
 			Log log = new Log(Severity.Verbose, new Date( ), "give you up");
 
-			rapport.writeLog(log);
+			rapport.writeLog(log, DalEnum.TextFile);
 
-			log = new Log(Severity.Warning, new Date( ), "let you down");
+			log = new Log(Severity.Information, new Date( ), "let you down");
 
-			rapport.writeLog(log);
+			rapport.writeLog(log, DalEnum.TextFile);
 
 			log = new Log(Severity.Error, new Date( ), "run around and desert you");
 
-			rapport.writeLog(log);
+			rapport.writeLog(log, DalEnum.TextFile);
 
 			log = new Log(Severity.Critical, new Date( ), "make you cry");
 
-			rapport.writeLog(log);
+			rapport.writeLog(log, DalEnum.TextFile);
 
 			log = new Log(Severity.Warning, new Date( ), "say goodbye");
 
-			rapport.writeLog(log);
+			rapport.writeLog(log, DalEnum.TextFile);
 
 			log = new Log(Severity.Error, new Date( ), "tell a lie and hurt you");
 
-			rapport.writeLog(log);
-
-			rapport.writeSeparation( );
-
-		}else{
-			System.out.println("The file doesn't exist or couldn't be create.");
+			rapport.writeLog(log, DalEnum.TextFile);
+		}catch(Exception e){
+			e.printStackTrace( );
 		}
+
 	}
 
 }
