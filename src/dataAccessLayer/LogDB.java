@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import businessLogicLayer.Log;
+import constants.DalEnum;
 import constants.Severity;
+import serviceLayer.CtrlLog;
 
 /**
  * DataBaseAccessObject
@@ -21,6 +23,8 @@ import constants.Severity;
  * @url https://github.com/P-marcou
  */
 public class LogDB {
+
+	private CtrlLog			ctrlLog				= CtrlLog.getInstance( );
 
 	private final String	SELECT_BY_ID		= "SELECT * FROM Logs WHERE identifier = ?;";
 
@@ -69,17 +73,20 @@ public class LogDB {
 			}else{
 				Log logExp = new Log(Severity.Error, new Date( ),
 						"The Select by id returned more than one result. Your Database might be corrupt !");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			}
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -88,7 +95,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}
@@ -122,13 +130,15 @@ public class LogDB {
 			}
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -137,7 +147,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}
@@ -169,13 +180,15 @@ public class LogDB {
 			}
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -184,7 +197,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}
@@ -218,13 +232,15 @@ public class LogDB {
 			}
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -233,7 +249,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}
@@ -256,13 +273,15 @@ public class LogDB {
 			request.executeUpdate( );
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -271,7 +290,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}
@@ -291,13 +311,15 @@ public class LogDB {
 
 		}catch(SQLException e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 
 		}catch(Exception e){
 			Log logExp = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(logExp, DalEnum.TextFile);
 			throw e;
 		}finally{
 			try{
@@ -306,7 +328,8 @@ public class LogDB {
 				}
 			}catch(SQLException e){
 				Log logExp = new Log(e, Severity.Critical, new Date( ), "Could not close database!");
-				// TODO Ecrire dans rapport.txt
+
+				ctrlLog.writeLog(logExp, DalEnum.TextFile);
 				throw e;
 			}
 		}

@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import businessLogicLayer.Log;
+import constants.DalEnum;
 import constants.Severity;
+import serviceLayer.CtrlLog;
 
 public class DataBaseAccess {
 
@@ -23,12 +25,18 @@ public class DataBaseAccess {
 			cnx = DriverManager.getConnection(url, user, passwd);
 
 		}catch(SQLException e){
+			CtrlLog ctrlLog = CtrlLog.getInstance( );
+
 			Log log = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(log, DalEnum.TextFile);
 		}catch(Exception e){
+			CtrlLog ctrlLog = CtrlLog.getInstance( );
+
 			Log log = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
-			// TODO Ecrire dans rapport.txt
+
+			ctrlLog.writeLog(log, DalEnum.TextFile);
 		}
 
 		return cnx;
