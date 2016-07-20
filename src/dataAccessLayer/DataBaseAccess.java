@@ -13,10 +13,14 @@ import serviceLayer.CtrlLog;
 public class DataBaseAccess {
 
 	public static Connection getConnection( ) {
+		CtrlLog ctrlLog = CtrlLog.getInstance( );
+
 		Connection cnx = null;
 		try{
 			Class.forName("YOUR SQL DRIVER CLASS NAME");
 			Log driverOk = new Log(Severity.Information, new Date( ), "Driver O.K.");
+
+			ctrlLog.writeLog(driverOk, DalEnum.TextFile);
 
 			String url = "jdbc:DATABASE://DATABASE_ADDRESS";
 			String user = "USERNAME";
@@ -25,14 +29,10 @@ public class DataBaseAccess {
 			cnx = DriverManager.getConnection(url, user, passwd);
 
 		}catch(SQLException e){
-			CtrlLog ctrlLog = CtrlLog.getInstance( );
-
 			Log log = new Log(e, Severity.Critical, new Date( ), "Could not connect to database!");
 
 			ctrlLog.writeLog(log, DalEnum.TextFile);
 		}catch(Exception e){
-			CtrlLog ctrlLog = CtrlLog.getInstance( );
-
 			Log log = new Log(e, Severity.Critical, new Date( ),
 					"An exception occured while trying to connect to the database!");
 
