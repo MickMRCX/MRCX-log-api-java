@@ -46,7 +46,7 @@ public class LogDB {
 	 * This method return the Log which his id
 	 * 
 	 * @param id
-	 * @return
+	 * @return the log
 	 * @throws SQLException
 	 */
 	public Log getOneById(int id) throws SQLException {

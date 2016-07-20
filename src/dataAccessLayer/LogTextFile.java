@@ -52,7 +52,7 @@ public class LogTextFile {
 	 * 
 	 * <code> return false</code> if the file cannot be created
 	 * 
-	 * @return
+	 * @return true if the file exist
 	 */
 	public boolean createFile( ) {
 		File file = new File(dir + name);
