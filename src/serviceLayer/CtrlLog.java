@@ -40,43 +40,69 @@ public class CtrlLog {
 		logText = new LogTextFile( );
 	}
 
+	/**
+	 * 
+	 * 
+	 * Return -1 in the case of error<br>
+	 * Return 0 if the Log's level is higher than the level wanted <br>
+	 * Return 1 if the Log is rightly writen where asked <br>
+	 * Return 2 if the Log is writen in TextFile instead of database<br>
+	 * 
+	 * @param log
+	 * @param dalEnum
+	 * @return an integer as described over
+	 */
 	public int writeLog(Log log, DalEnum dalEnum) {
-		logs.add(log);
+		if(log.getSeverity( ).ordinal( ) <= Configuration.getSeverity( ).ordinal( )){
 
-		switch(dalEnum) {
-			case Database:
-				boolean success = false;
-				try{
-					LogDB logdb = new LogDB( );
+			logs.add(log);
 
-					logdb.insert(log);
-					success = true;
-				}catch(SQLException e){
-					success = false;
-				}catch(Exception e){
-					success = false;
-				}
+			switch(dalEnum) {
+				case Database:
+					boolean success = false;
+					try{
+						LogDB logdb = new LogDB( );
 
-				if(!success){
-					if(logText == null){
-						logText = new LogTextFile(Configuration.getDefaultDirectory( ),
-								Configuration.getDefaultFileName( ), Configuration.getDefaultSummary( ));
+						logdb.insert(log);
+						success = true;
+					}catch(SQLException e){
+						success = false;
+					}catch(Exception e){
+						success = false;
 					}
+
+					if(!success){
+						if(logText == null){
+							logText = new LogTextFile(Configuration.getDefaultDirectory( ),
+									Configuration.getDefaultFileName( ), Configuration.getDefaultSummary( ));
+						}
+						logText.writeLog(log);
+
+						return -2;
+					}
+					return 1;
+				case CSVFile:
+					// TODO write in CSV File
+					break;
+				case TextFile:
 					logText.writeLog(log);
 
-					return -2;
-				}
-				return 1;
-			case CSVFile:
-				// TODO write in CSV File
-				break;
-			case TextFile:
-				logText.writeLog(log);
+					return 1;
+			}
 
-				return 1;
+			return -1;
 		}
 
-		return -1;
+		return 0;
+	}
+
+	/**
+	 * Write a message in the log text file
+	 * 
+	 * @param message
+	 */
+	public void writeMessage(String message) {
+		logText.writeMessage(message);
 	}
 
 	public LogTextFile getLogText( ) {

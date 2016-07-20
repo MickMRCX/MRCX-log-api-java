@@ -3,4 +3,5 @@
 	<directory>/home/pascal/Documents/</directory>
 	<filename>report.txt</filename>
 	<summary>Never gonna</summary>
+	<max-level>Warning</max-level>
 </default>

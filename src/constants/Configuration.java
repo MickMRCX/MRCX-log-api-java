@@ -12,6 +12,7 @@ public final class Configuration {
 	private static String	defaultDirectory;
 	private static String	defaultFileName;
 	private static String	defaultSummary;
+	private static Severity	severity;
 
 	public static String getDefaultDirectory( ) {
 		return defaultDirectory;
@@ -35,5 +36,13 @@ public final class Configuration {
 
 	public static void setDefaultSummary(String defaultSummary) {
 		Configuration.defaultSummary = defaultSummary;
+	}
+
+	public static Severity getSeverity( ) {
+		return severity;
+	}
+
+	public static void setSeverity(Severity severity) {
+		Configuration.severity = severity;
 	}
 }

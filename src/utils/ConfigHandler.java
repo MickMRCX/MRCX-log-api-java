@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import constants.Configuration;
+import constants.Severity;
 
 /**
  * @author pascal
@@ -18,6 +19,7 @@ public class ConfigHandler extends DefaultHandler {
 	boolean	bDirectory	= false;
 	boolean	bFileName	= false;
 	boolean	bSummary	= false;
+	boolean	bSeverity	= false;
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -27,6 +29,8 @@ public class ConfigHandler extends DefaultHandler {
 			bFileName = true;
 		}else if(qName.equalsIgnoreCase("summary")){
 			bSummary = true;
+		}else if(qName.equalsIgnoreCase("severity")){
+			bSeverity = true;
 		}
 	}
 
@@ -40,6 +44,9 @@ public class ConfigHandler extends DefaultHandler {
 			bFileName = false;
 		}else if(bSummary){
 			Configuration.setDefaultSummary(new String(ch, start, length));
+			bSummary = false;
+		}else if(bSeverity){
+			Configuration.setSeverity(Severity.valueOf(new String(ch, start, length)));
 			bSummary = false;
 		}
 	}
