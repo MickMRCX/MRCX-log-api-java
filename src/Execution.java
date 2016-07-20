@@ -7,19 +7,12 @@ import serviceLayer.CtrlLog;
 import utils.ReadXMLFile;
 
 /**
- * 
- */
-
-/**
  * @author pascal
  *
  */
 public class Execution {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	public static void exemple( ) {
 
 		ReadXMLFile.readDefaultConfiguration( );
 
