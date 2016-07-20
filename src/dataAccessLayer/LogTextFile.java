@@ -55,13 +55,20 @@ public class LogTextFile {
 	 * @return true if the file exist
 	 */
 	public boolean createFile( ) {
+		File directory = new File(dir);
 		File file = new File(dir + name);
+
+		if(!directory.exists( )){
+			directory.mkdirs( );
+		}
 
 		if(!file.exists( )){
 			try(FileWriter fw = new FileWriter(dir + name)){
 
 				if(null != getSummary( )){
-					fw.write(getSummary( ) + "\n\n");
+					fw.write(getSummary( ));
+					fw.write(System.lineSeparator( ));
+					fw.write(System.lineSeparator( ));
 				}
 
 			}catch(IOException e){
@@ -81,7 +88,8 @@ public class LogTextFile {
 	public void writeLog(Log log) {
 		try(FileWriter fw = new FileWriter(dir + name, true)){
 
-			fw.write(log.toString( ) + "\n");
+			fw.write(log.toString( ));
+			fw.write(System.lineSeparator( ));
 
 		}catch(IOException e){
 			e.printStackTrace( );
@@ -94,11 +102,28 @@ public class LogTextFile {
 	public void writeSeparation( ) {
 		try(FileWriter fw = new FileWriter(dir + name, true)){
 
-			fw.write("----------------------------------------------------------------\n");
+			fw.write("----------------------------------------------------------------");
+			fw.write(System.lineSeparator( ));
 
 		}catch(IOException e){
 			e.printStackTrace( );
 		}
+	}
+
+	/**
+	 * Write a message in the log file
+	 * 
+	 * @param message
+	 */
+	public void writeMessage(String message) {
+		try(FileWriter fw = new FileWriter(dir + name, true)){
+
+			fw.write(message + "\n");
+
+		}catch(IOException e){
+			e.printStackTrace( );
+		}
+
 	}
 
 	public String getSummary( ) {
