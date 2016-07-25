@@ -12,7 +12,7 @@ import utils.ReadXMLFile;
  */
 public class Execution {
 
-	public static void exemple( ) {
+	public static void executer(String[] args) {
 
 		ReadXMLFile.readDefaultConfiguration( );
 
@@ -29,19 +29,15 @@ public class Execution {
 
 			rapport.writeLog(log, DalEnum.TextFile);
 
+			log = new Log(Severity.Warning, new Date( ), "say goodbye");
+
+			rapport.writeLog(log, DalEnum.TextFile);
+
 			log = new Log(Severity.Error, new Date( ), "run around and desert you");
 
 			rapport.writeLog(log, DalEnum.TextFile);
 
 			log = new Log(Severity.Critical, new Date( ), "make you cry");
-
-			rapport.writeLog(log, DalEnum.TextFile);
-
-			log = new Log(Severity.Warning, new Date( ), "say goodbye");
-
-			rapport.writeLog(log, DalEnum.TextFile);
-
-			log = new Log(Severity.Error, new Date( ), "tell a lie and hurt you");
 
 			rapport.writeLog(log, DalEnum.TextFile);
 		}catch(Exception e){

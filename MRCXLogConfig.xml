@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <default>
-	<directory>/home/pascal/Documents/</directory>
-	<filename>report.txt</filename>
+	<directory>d:\\test\\</directory>
+	<filename>test.txt</filename>
 	<summary>Never gonna</summary>
-	<max-level>Warning</max-level>
+	<severity>Warning</severity>
 </default>

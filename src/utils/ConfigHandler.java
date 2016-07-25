@@ -46,8 +46,10 @@ public class ConfigHandler extends DefaultHandler {
 			Configuration.setDefaultSummary(new String(ch, start, length));
 			bSummary = false;
 		}else if(bSeverity){
-			Configuration.setSeverity(Severity.valueOf(new String(ch, start, length)));
-			bSummary = false;
+			String sev = new String(ch, start, length);
+
+			Configuration.setSeverity(Severity.valueOf(sev.trim( )));
+			bSeverity = false;
 		}
 	}
 }
