@@ -14,9 +14,10 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class ReadXMLFile {
 
-	public static void readDefaultConfiguration( ) {
+	public static void readDefaultConfiguration(String fichier) {
 		try{
-			File inputFile = new File("MRCXLogConfig.xml");
+			File inputFile = new File(fichier);
+
 			SAXParserFactory factory = SAXParserFactory.newInstance( );
 			SAXParser saxParser = factory.newSAXParser( );
 			ConfigHandler configHandler = new ConfigHandler( );

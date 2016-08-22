@@ -14,7 +14,7 @@ public class Execution {
 
 	public static void executer(String[] args) {
 
-		ReadXMLFile.readDefaultConfiguration( );
+		ReadXMLFile.readDefaultConfiguration("MRCXLogConfig.xml");
 
 		CtrlLog rapport = CtrlLog.getInstance( );
 
